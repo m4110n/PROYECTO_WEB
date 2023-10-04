@@ -14,11 +14,12 @@
         <!--Formulario metodo de envio-->
         <form action="" method="post">
             <!--Validacion para el formulario-->
-            <h2>Sign in</h2>
             <?php
-            include "conexion/conexion.php";
             include "controlador/controller_login.php";
+            include "../conexion/conexion.php";
             ?>
+            <h2>Sign in</h2>
+
             <div class="inputBox">
                 <input type="text" name="UserName" required="required">
                 <span>User name</span>
