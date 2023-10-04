@@ -16,6 +16,7 @@
             <!--Validacion para el formulario-->
             <h2>Sign in</h2>
             <?php
+            include "conexion/conexion.php";
             include "controlador/controller_login.php";
             ?>
             <div class="inputBox">
