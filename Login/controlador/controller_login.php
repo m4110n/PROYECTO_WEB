@@ -1,7 +1,7 @@
 <?php
 
 include_once("../conexion/conexion.php");
-
+session_start();
 if (!empty($_POST["login"])) {
     if (!empty($_POST["UserName"]) and ($_POST["Password"])) {
         //almacenando valores de usuario
@@ -11,6 +11,8 @@ if (!empty($_POST["login"])) {
         $sql = $conn->query("select * from users where name ='$Usuario' and password ='$Contraseña'");
         //validacion 1
         if ($datos = $sql->fetch_object()) {
+            $_SESSION["id"] = $datos->id;
+            $_SESSION["Name"] = $datos->name;
             //insertar el menu de inicio en url.php
             header("location: ../Menu/index.php");
         } else {

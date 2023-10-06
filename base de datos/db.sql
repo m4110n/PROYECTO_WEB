@@ -11,7 +11,8 @@ create table if not EXISTS users(
     name varchar (20) not null,
     email varchar(50) not null,
     permissions varchar(30) not null,
-    password varchar (15) not null) ENGINE=InnoDB;
+    password varchar (15) not null,
+    status varchar (15) not null) ENGINE=InnoDB;
 
 -- Base de datos para todas las consultas
 

@@ -1,14 +1,14 @@
 -- ingresando datos de usuarios
-INSERT INTO users (name, email, permissions, password) VALUES
-('Anderson', 'anderson@gmail.com', 'admin', 'root'),
-('Edward', 'edward@gmail.com', 'admin', 'root'),
-('Anthoni', 'anthoni@gmail.com', 'admin', 'root'),
-('Ana', 'ana@gmail.com', 'admin', 'root'),
-('pablo', 'pablo@gmail.com', 'admin', 'root'),
-('rose', 'rose@gmail.com', 'user', 'root'),
-('Elizabet', 'eli@gmail.com', 'editor', 'root'),
-('RandomUser1', 'random1@gmail.com', 'user', '84870'),
-('RandomUser2', 'random2@gmail.com', 'editor', '12344');
+INSERT INTO users (name, email, permissions, password, status) VALUES
+('Anderson', 'anderson@gmail.com', 'admin', 'root', 'active'),
+('Edward', 'edward@gmail.com', 'admin', 'root','active'),
+('Anthoni', 'anthoni@gmail.com', 'admin', 'root','active'),
+('Ana', 'ana@gmail.com', 'admin', 'root','active'),
+('pablo', 'pablo@gmail.com', 'admin', 'root','active'),
+('rose', 'rose@gmail.com', 'user', 'root','inactive'),
+('Elizabet', 'eli@gmail.com', 'editor', 'root','inactive'),
+('RandomUser1', 'random1@gmail.com', 'user', '84870','inactive'),
+('RandomUser2', 'random2@gmail.com', 'editor', '12344','inactive');
 
 -- Customers(Clientes)-------------------------------------------------
 
