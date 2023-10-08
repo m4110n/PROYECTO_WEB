@@ -31,8 +31,8 @@
                 <i></i>
             </div>
             <div class="Links">
-                <a href="#">Forgot Password</a>
-                <a href="#">Sing</a>
+                <a href="#">remember me</a>
+                <a href="#">Forgot your password?</a>
             </div>
             <input type="submit" name="login" value="login">
         </form>
