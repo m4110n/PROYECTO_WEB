@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
     $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
     $password = ""; // Cambia esto a tu contraseña de la base de datos
-    $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
+    $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos
 
     // Crear una conexión
     $conn = new mysqli($servername, $username, $password, $dbname);

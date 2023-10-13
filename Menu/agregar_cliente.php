@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['nombre'])) {
+    // Redirigir a la página de inicio de sesión si no está logueado
+    header("Location: ../login/login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -43,8 +54,8 @@
             // Luego, puedes guardar los datos en tu base de datos de manera segura
             // Establecer la conexión a la base de datos
             $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-            $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
-            $password = ""; // Cambia esto a tu contraseña de la base de datos
+            $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
+            $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
             $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
             // Crear una conexión
@@ -93,8 +104,8 @@
                     <?php
                     // Obtén valores únicos de Status desde la base de datos
                     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-                    $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
-                    $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
+                    $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+                    $password = ""; // Cambia esto a tu contraseña de la base de datos
                     $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
                     // Crear una conexión
@@ -151,8 +162,8 @@
                     <?php
                     // Obtén valores únicos de Customer Type desde la base de datos
                     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-                    $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
-                    $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
+                    $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+                    $password = ""; // Cambia esto a tu contraseña de la base de datos
                     $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
                     // Crear una conexión

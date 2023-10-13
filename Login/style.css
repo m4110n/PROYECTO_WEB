@@ -1,197 +1,225 @@
-@import url('https//fonts.googleapis.com/css2?family=poppins:wght@300;400;500;600;700;800;900&display=sawp');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
-
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #23242a
+    background-size: cover;
+    background: url('./assets/background.png') no-repeat center;
 }
-
-.box {
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+.logo {
+    font-size: 2em;
+    color: #ffffff;
+    user-select: none;
+}
+.navigation a {
     position: relative;
-    width: 380px;
-    height: 420px;
-    background: #1c1c1c;
-    border-radius: 8px;
+    font-size: 1.1em;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+.navigation a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+.navigation .bthLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+.navigation .bthLogin-popup:hover {
+    background: #ffffff;
+    color: #162938;
+}
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
 }
-.box:before{
-    content: '';
+.wrapper.active-popup {
+    transform: scale(1);
+}
+.wrapper.active {
+    height: 520px;
+}
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+.wrapper .form-box.login {
+    transition: transfrom .18s ease;
+    transform: translateX(0);
+}
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+.wrapper .form-box.register {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg,transparent,transparent, #45f3ff, #45f3ff, #45f3ff);
-    z-index: 1;
-    transform-origin:bottom right;
-    animation: animate 6s linear infinite;
+    transition: none;
+    transform: translateX(400px);
 }
-.box::after{
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg,transparent,transparent, #45f3ff, #45f3ff, #45f3ff);
-    z-index: 1;
-    transform-origin:bottom right;
-    animation: animate 6s linear infinite;
-    animation-delay: -3s;
+.wrapper.active .form-box.register {
+    transition: transfrom .18s ease;
+    transform: translateX(0);
 }
-.borderLine{
+.wrapper .icon-close {
     position: absolute;
     top: 0;
-    inset: 0;
-}
-.borderLine::before{
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg,transparent,transparent, #ff2770, #ff2770, #ff2770);
-    z-index: 1;
-    transform-origin:bottom right;
-    animation: animate 6s linear infinite;
-    animation-delay: -1.5s;
-}
-.borderLine::after{
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg,transparent,transparent, #ff2770, #ff2770, #ff2770);
-    z-index: 1;
-    transform-origin:bottom right;
-    animation: animate 6s linear infinite;
-    animation-delay: -4.5s;
-}
-@keyframes animate{
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-}
-.box form {
-    position: absolute;
-    inset: 4px;
-    background: #222;
-    padding: 50px 40px;
-    border-radius: 8px;
-    z-index: 2;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #ffffff;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
 }
-
-.box form h2 {
-    color: #fff;
-    font-weight: 500;
+.form-box h2 {
+    font-size: 2em;
+    color: #162938;
     text-align: center;
-    letter-spacing: 0.1em;
 }
-
-.box form .inputBox {
-    position: relative;
-    width: 300px;
-    margin-top: 35px;
-}
-
-.box form .inputBox input {
+.input-box {
     position: relative;
     width: 100%;
-    padding: 20px 10px 10px;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -5px;
+}
+.input-box input {
+    width: 100%;
+    height: 100%;
     background: transparent;
-    outline: none;
-    box-shadow: none;
     border: none;
-    color: #23242a;
+    outline: none;
     font-size: 1em;
-    letter-spacing: 0.05em;
-    transition: 0.5s;
-    z-index: 10;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
 }
-
-.box form .inputBox span {
+.input-box .icon {
     position: absolute;
-    left: 0;
-    padding: 20px 0px 10px;
-    pointer-events: none;
-    color: #8f8f8f;
-    font-size: 1em;
-    letter-spacing: 0.05em;
-    transition: 0.5s;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162938;
+    line-height: 57px;
 }
-
-.box form .inputBox input:valid~span,
-.box form .inputBox input:focus~span {
-    color: #fff;
-    font-size: 0.75em;
-    transform: translateY(-34px);
-}
-
-.box form .inputBox i {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    transition: 0.05s;
-    pointer-events: none;
-}
-
-.box form .inputBox input:valid~i,
-.box form .inputBox input:focus~i {
-    height: 44px;
-}
-
-.box form .Links {
+.remember-forgot {
+    font-size: .9em;
+    color: #162938;
+    font-weight: 500;
+    margin: -15px 0 15px;
     display: flex;
     justify-content: space-between;
 }
-
-.box form .Links a {
-    margin: 10px 0;
-    font-size: 0.75em;
-    color: #8f8f8f;
+.remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+}
+.remember-forgot a {
+    color: #162938;
     text-decoration: none;
 }
-
-.box form .Links a:hover,
-.box form .Links a:nth-child(2) {
-    color: #fff;
+.remember-forgot a:hover {
+    text-decoration: underline;
 }
-
-.box form input[type="submit"] {
+.bth {
+    width: 100%;
+    height: 45px;
+    background: #162938;
     border: none;
     outline: none;
-    padding: 9px 25px;
-    background: #fff;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9em;
-    border-radius: 4px;
-    font-weight: 600;
-    width: 100px;
-    margin-top: 10px;
+    font-size: 1em;
+    color: #ffffff;
+    font-weight: 500;
 }
-
-.box form input[type="submit"]:active {
-    opacity: 0.8;
+.login-register {
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+.login-register p a {
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-register p a:hover {
+    text-decoration: underline;
 }
