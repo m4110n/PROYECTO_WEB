@@ -12,7 +12,7 @@ if (!isset($_SESSION['nombre'])) {
 <html>
 
 <head>
-    <title>Agregar Nuevo Cliente</title>
+    <title>Agregar Nuevo Proveedor</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,11 +22,11 @@ if (!isset($_SESSION['nombre'])) {
 
 <body>
     <div class="container">
-        <h1 class="mt-4">Agregar Nuevo Cliente</h1>
+        <h1 class="mt-4">Agregar Nuevo Proveedor</h1>
 
         <?php
         // Inicializa las variables para los campos del formulario
-        $name = $status = $address = $nit = $phone = $entry_date = $exit_date = $customer_type = "";
+        $name = $status = $address = $nit = $phone = $entry_date = $exit_date = $supplier_type = "";
         $error = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,7 +38,7 @@ if (!isset($_SESSION['nombre'])) {
             $phone = $_POST["phone"];
             $entry_date = $_POST["entry_date"];
             $exit_date = $_POST["exit_date"];
-            $customer_type = $_POST["customer_type"];
+            $supplier_type = $_POST["supplier_type"];
 
             // Valida y limpia los datos de entrada (ejemplo: evitar inyección SQL)
             $name = htmlspecialchars($name);
@@ -48,7 +48,7 @@ if (!isset($_SESSION['nombre'])) {
             $phone = htmlspecialchars($phone);
             $entry_date = htmlspecialchars($entry_date);
             $exit_date = htmlspecialchars($exit_date);
-            $customer_type = htmlspecialchars($customer_type);
+            $supplier_type = htmlspecialchars($supplier_type);
 
             // Luego, puedes guardar los datos en tu base de datos de manera segura
             // Establecer la conexión a la base de datos
@@ -65,21 +65,21 @@ if (!isset($_SESSION['nombre'])) {
                 die("Conexión fallida: " . $conn->connect_error);
             }
 
-            // Insertar los datos del nuevo cliente en la base de datos sin especificar Code
-            $sql = "INSERT INTO customers (Name, Status, Address, Nit, Phone, entry_date, exit_date, customer_type)
+            // Insertar los datos del nuevo proveedor en la base de datos sin especificar Code
+            $sql = "INSERT INTO Suppliers (Name, Status, Address, Nit, Phone, Entry_Date, Exit_Date, Supplier_Type)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Utilizar una sentencia preparada para evitar la inyección SQL
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssssss", $name, $status, $address, $nit, $phone, $entry_date, $exit_date, $customer_type);
+            $stmt->bind_param("ssssssss", $name, $status, $address, $nit, $phone, $entry_date, $exit_date, $supplier_type);
 
             if ($stmt->execute()) {
-                echo "<div class='alert alert-success'>Nuevo cliente agregado correctamente.</div>";
-                // Redirige al usuario a la página de clientes después de agregar un cliente
-                echo "<script>window.location.href = 'clientes.php';</script>";
+                echo "<div class='alert alert-success'>Nuevo proveedor agregado correctamente.</div>";
+                // Redirige al usuario a la página de proveedores después de agregar un proveedor
+                echo "<script>window.location.href = 'proveedores.php';</script>";
                 exit();
             } else {
-                $error = "Error al agregar el cliente: " . $conn->error;
+                $error = "Error al agregar el proveedor: " . $conn->error;
             }
 
             // Cierra la conexión
@@ -88,7 +88,7 @@ if (!isset($_SESSION['nombre'])) {
         }
         ?>
 
-        <!-- Formulario para agregar un nuevo cliente -->
+        <!-- Formulario para agregar un nuevo proveedor -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <!-- No incluir el campo Code en el formulario -->
             <input type="hidden" name="code" value="auto_increment"> <!-- Campo Code se establece automáticamente -->
@@ -103,8 +103,8 @@ if (!isset($_SESSION['nombre'])) {
                     <?php
                     // Obtén valores únicos de Status desde la base de datos
                     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-                    $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
-                    $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
+                    $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+                    $password = ""; // Cambia esto a tu contraseña de la base de datos
                     $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
                     // Crear una conexión
@@ -115,7 +115,7 @@ if (!isset($_SESSION['nombre'])) {
                         die("Conexión fallida: " . $conn->connect_error);
                     }
 
-                    $sqlStatus = "SELECT DISTINCT Status FROM customers";
+                    $sqlStatus = "SELECT DISTINCT Status FROM Suppliers";
                     $resultStatus = $conn->query($sqlStatus);
 
                     if ($resultStatus->num_rows > 0) {
@@ -156,13 +156,13 @@ if (!isset($_SESSION['nombre'])) {
             </div>
 
             <div class="form-group">
-                <label for="customer_type">Customer Type:</label>
-                <select class="form-control" name="customer_type" required>
+                <label for="supplier_type">Supplier Type:</label>
+                <select class="form-control" name="supplier_type" required>
                     <?php
-                    // Obtén valores únicos de Customer Type desde la base de datos
+                    // Obtén valores únicos de Supplier Type desde la base de datos
                     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-                    $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
-                    $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
+                    $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+                    $password = ""; // Cambia esto a tu contraseña de la base de datos
                     $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
                     // Crear una conexión
@@ -173,12 +173,12 @@ if (!isset($_SESSION['nombre'])) {
                         die("Conexión fallida: " . $conn->connect_error);
                     }
 
-                    $sqlCustomerType = "SELECT DISTINCT customer_type FROM customers";
-                    $resultCustomerType = $conn->query($sqlCustomerType);
+                    $sqlSupplierType = "SELECT DISTINCT Supplier_Type FROM Suppliers";
+                    $resultSupplierType = $conn->query($sqlSupplierType);
 
-                    if ($resultCustomerType->num_rows > 0) {
-                        while ($rowCustomerType = $resultCustomerType->fetch_assoc()) {
-                            echo "<option value='" . $rowCustomerType["customer_type"] . "'>" . $rowCustomerType["customer_type"] . "</option>";
+                    if ($resultSupplierType->num_rows > 0) {
+                        while ($rowSupplierType = $resultSupplierType->fetch_assoc()) {
+                            echo "<option value='" . $rowSupplierType["Supplier_Type"] . "'>" . $rowSupplierType["Supplier_Type"] . "</option>";
                         }
                     }
 
@@ -188,7 +188,7 @@ if (!isset($_SESSION['nombre'])) {
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Agregar Cliente</button>
+            <button type="submit" class="btn btn-primary">Agregar Proveedor</button>
         </form>
 
         <!-- Mostrar errores -->

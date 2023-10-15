@@ -1,10 +1,15 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["proveedor_id"])) {
     // Obtener los datos del formulario
-    $customer_id = $_POST["customer_id"];
+    $proveedor_id = $_POST["proveedor_id"];
     $name = $_POST["name"];
     $status = $_POST["status"];
-    // Agrega más campos según tus necesidades
+    $address = $_POST["address"];
+    $nit = $_POST["nit"];
+    $phone = $_POST["phone"];
+    $entry_date = $_POST["entry_date"];
+    $exit_date = $_POST["exit_date"];
+    $supplier_type = $_POST["supplier_type"];
 
     // Establecer la conexión a la base de datos
     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
@@ -20,11 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Actualizar los datos del cliente en la base de datos
-    $sql = "UPDATE customers SET Name='$name', Status='$status' WHERE Code=$customer_id";
+    // Actualizar los datos del proveedor en la base de datos
+    $sql = "UPDATE Suppliers SET Name='$name', Status='$status', Address='$address', Nit='$nit', Phone='$phone', Entry_Date='$entry_date', Exit_Date='$exit_date', Supplier_Type='$supplier_type' WHERE Code=$proveedor_id";
+
     if ($conn->query($sql) === TRUE) {
-        // Los cambios se han guardado correctamente, redirige al usuario a clientes.php
-        header("Location: clientes.php");
+        // Los cambios se han guardado correctamente, redirige al usuario a proveedores.php
+        header("Location: proveedores.php");
         exit(); // Asegúrate de salir después de redirigir
     } else {
         echo "Error al actualizar los datos: " . $conn->error;
@@ -35,3 +41,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["customer_id"])) {
 } else {
     echo "Error en la solicitud de actualización.";
 }
+?>

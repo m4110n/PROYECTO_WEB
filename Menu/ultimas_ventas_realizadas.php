@@ -16,9 +16,54 @@ if (!isset($_SESSION['nombre'])) {
     <!-- Agrega los enlaces a los estilos de Bootstrap y DataTables -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+
 </head>
 
 <body>
+    <!-- Botón desplegable en la parte superior derecha -->
+    <div class="btn-group float-right">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Opciones
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="index.php">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+            <a class="dropdown-item" href="clientes.php">
+                <i class="fas fa-users"></i> Clientes
+            </a>
+            <a class="dropdown-item" href="compras.php">
+                <i class="fas fa-shopping-cart"></i> Compras
+            </a>
+            <a class="dropdown-item" href="empleados.php">
+                <i class="fas fa-user"></i> Empleados
+            </a>
+            <a class="dropdown-item" href="productos.php">
+                <i class="fas fa-box"></i> Productos
+            </a>
+            <a class="dropdown-item" href="proveedores.php">
+                <i class="fas fa-truck"></i> Proveedores
+            </a>
+            <a class="dropdown-item" href="usuarios.php">
+                <i class="fas fa-user-circle"></i> Usuarios
+            </a>
+            <a class="dropdown-item" href="ventas.php">
+                <i class="fas fa-dollar-sign"></i> Ventas
+            </a>
+            <a class="dropdown-item" href="categorias.php">
+                <i class="fas fa-tags"></i> Categorías
+            </a>
+        </div>
+    </div>
     <div class="container mt-5">
         <h1>Listado de Ventas</h1>
 

@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-    $customer_id = $_GET["id"];
+    $proveedor_id = $_GET["id"];
 
     // Establecer la conexión a la base de datos
     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
@@ -16,18 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Eliminar el cliente de la base de datos
-    $sql = "DELETE FROM customers WHERE Code = $customer_id";
+    // Eliminar el proveedor de la base de datos
+    $sql = "DELETE FROM Suppliers WHERE Code = $proveedor_id";
     if ($conn->query($sql) === TRUE) {
-        // Redirige a la página de clientes después de eliminar el cliente con éxito
-        header("Location: clientes.php");
+        // Redirige a la página de proveedores después de eliminar el proveedor con éxito
+        header("Location: proveedores.php");
         exit; // Detiene la ejecución del script después de la redirección
     } else {
-        echo "Error al eliminar el cliente: " . $conn->error;
+        echo "Error al eliminar el proveedor: " . $conn->error;
     }
 
     // Cerrar la conexión
     $conn->close();
 } else {
-    echo "ID de cliente no especificado.";
+    echo "ID de proveedor no especificado.";
 }
+?>

@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['nombre'])) {
+    // Redirigir a la página de inicio de sesión si no está logueado
+    header("Location: ../login/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 

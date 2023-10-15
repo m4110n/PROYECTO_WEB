@@ -19,6 +19,7 @@ if (!isset($_SESSION['nombre'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Enlaza el archivo CSS -->
+
 </head>
 
 <body>
@@ -63,8 +64,11 @@ if (!isset($_SESSION['nombre'])) {
                     </div>
                     <ul class="menu-list">
                         <li><a href="ultimas_ventas_realizadas.php">Últimas ventas realizadas <i class="fas fa-chart-line"></i></a></li>
-                        <li><a href="#">Productos más vendidos <i class="fas fa-shopping-bag"></i></a></li>
-                        <li><a href="#">Productos próximos a vencer <i class="fas fa-exclamation-circle"></i></a></li>
+                        <li><a href="productos_mas_vendidos.php">Productos más vendidos <i class="fas fa-shopping-bag"></i></a></li>
+                        <li><a href="proximos_vencer.php">Productos próximos a vencer <i class="fas fa-exclamation-circle"></i></a></li>
+                        <li><a href="#">Reportes <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="generar_factura.php">Generar Factura <i class="fas fa-file-alt"></i></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -102,7 +106,7 @@ if (!isset($_SESSION['nombre'])) {
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="enlace5.php" class="icon-link">
+                        <a href="proveedores.php" class="icon-link">
                             <i class="fas fa-truck fa-3x"></i>
                             <p>Proveedores</p>
                         </a>
@@ -114,7 +118,7 @@ if (!isset($_SESSION['nombre'])) {
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="enlace7.php" class="icon-link">
+                        <a href="ventas.php" class="icon-link">
                             <i class="fas fa-chart-line fa-3x"></i>
                             <p>Ventas</p>
                         </a>
@@ -127,7 +131,7 @@ if (!isset($_SESSION['nombre'])) {
                     </div>
                     <!-- Agrega más iconos aquí -->
                     <div class="col-md-3">
-                        <a href="#" class="icon-link">
+                        <a href="grafica.php" class="icon-link">
                             <i class="fas fa-chart-pie fa-3x"></i>
                             <p>Estadísticas</p>
                         </a>
@@ -167,18 +171,12 @@ if (!isset($_SESSION['nombre'])) {
     <div class="menu-derecho">
         <ul class="list-group">
             <li class="list-group-item"><a href="galeria.php"><i class="fas fa-images"></i> Galería</a></li>
-            <li class="list-group-item"><a href="grafica.php"><i class="fas fa-chart-bar"></i> Gráficas</a></li>
-            <li class="list-group-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="reportesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-file-alt"></i> Reportes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="reportesDropdown">
-                    <a class="dropdown-item" href="#">Reporte 1</a>
-                    <a class="dropdown-item" href="#">Reporte 2</a>
-                    <a class="dropdown-item" href="#">Reporte 3</a>
-                </div>
-            </li>
-        </ul>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li class="list-group-item"><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li class="list-group-item"><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            </ul>
+
     </div>
 
     <script>

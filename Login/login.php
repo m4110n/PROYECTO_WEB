@@ -49,8 +49,8 @@
                     <label>Contraseña</label>
                 </div>
                 <div class="remember-forgot">
-                    <!--check-->
-                    <label><input type="checkbox" required>Recordarme</label>
+                    <label><input type="checkbox" name="recordarme">Recordarme</label>
+                    <!--     <label><input type="checkbox" required>Recordarme</label>    usado para obligar a guardar la password-->
                     <a href="#">¿Olvidaste la contraseña?</a>
                 </div>
                 <button type="submit" class="bth" name="inicio_sesion">Iniciar sesión</button>
@@ -63,8 +63,8 @@
         <div class="form-box register">
             <h2>Registro</h2>
             <?php
-            include "./conexion_dba/conexion.php";
-            include "./controlador_register/REcontrolador.php";
+            include "../conexion_dba/conexion.php";
+            include "../login/controlador_register/REcontrolador.php";
             ?>
             <form action="#" method="post">
                 <!--usuario-->
@@ -80,7 +80,7 @@
                     <span class="icon">
                         <ion-icon name="mail"></ion-icon>
                     </span>
-                    <input type="email" name="correo_registro" required="">
+                    <input type="email" required="" name="correo_registro">
                     <label>Correo electrónico</label>
                 </div>
                 <!--ingresar contraseña-->
@@ -88,7 +88,7 @@
                     <span class="icon">
                         <ion-icon name="lock-closed"></ion-icon>
                     </span>
-                    <input type="password" name="password_register" required="">
+                    <input type="password" required="" name="password_register">
                     <label>Contraseña</label>
                 </div>
                 <div class="remember-forgot">

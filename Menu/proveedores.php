@@ -12,21 +12,20 @@ if (!isset($_SESSION['nombre'])) {
 <html>
 
 <head>
-    <title>Tabla de Clientes</title>
+    <title>Tabla de Proveedores</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
 </head>
 
 <body>
     <div class="container">
-        <h1 class="mt-4">Tabla de Clientes</h1>
+        <h1 class="mt-4">Tabla de Proveedores</h1>
 
         <!-- Botón desplegable en la parte superior derecha -->
         <div class="btn-group float-right">
@@ -64,9 +63,9 @@ if (!isset($_SESSION['nombre'])) {
             </div>
         </div>
 
-        <!-- Botón para agregar nuevo cliente -->
-        <a class="btn btn-primary" href="agregar_cliente.php">
-            <i class="fas fa-plus"></i> Agregar Cliente
+        <!-- Botón para agregar nuevo proveedor -->
+        <a class="btn btn-primary" href="agregar_proveedor.php">
+            <i class="fas fa-plus"></i> Agregar proveedor
         </a>
 
         <!-- Botón para exportar a Excel -->
@@ -76,9 +75,9 @@ if (!isset($_SESSION['nombre'])) {
         <button class="btn btn-danger" id="exportToPDF">Exportar a PDF</button>
 
         <!-- Formulario de búsqueda -->
-        <form class="form-inline" action="buscar_cliente.php" method="GET">
+        <form class="form-inline" action="buscar_proveedor.php" method="GET">
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" name="query" placeholder="Buscar cliente...">
+                <input type="text" class="form-control" name="query" placeholder="Buscar proveedor...">
             </div>
             <button type="submit" class="btn btn-primary mb-2">
                 <i class="fas fa-search"></i> Buscar
@@ -96,7 +95,7 @@ if (!isset($_SESSION['nombre'])) {
                     <th>Phone</th>
                     <th>Entry Date</th>
                     <th>Exit Date</th>
-                    <th>Customer Type</th>
+                    <th>Supplier Type</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -116,39 +115,43 @@ if (!isset($_SESSION['nombre'])) {
                     die("Conexión fallida: " . $conn->connect_error);
                 }
 
-                // Definir la cantidad de clientes por página
-                $clientesPorPagina = 10;
+                // Definir la cantidad de proveedores por página
+                $proveedoresPorPagina = 10;
 
                 // Obtener la página actual
                 $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 
                 // Calcular el inicio y fin de la consulta
-                $inicio = ($paginaActual - 1) * $clientesPorPagina;
+                $inicio = ($paginaActual - 1) * $proveedoresPorPagina;
 
                 // Consultar la base de datos con paginación
-                $sql = "SELECT * FROM customers LIMIT $inicio, $clientesPorPagina";
+                $sql = "SELECT Code, Name, Status, Address, Nit, Phone, Entry_Date, Exit_Date, Supplier_Type FROM Suppliers LIMIT $inicio, $proveedoresPorPagina";
                 $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["Code"] . "</td>";
-                        echo "<td>" . $row["Name"] . "</td>";
-                        echo "<td>" . $row["Status"] . "</td>";
-                        echo "<td>" . $row["Address"] . "</td>";
-                        echo "<td>" . $row["Nit"] . "</td>";
-                        echo "<td>" . $row["Phone"] . "</td>";
-                        echo "<td>" . $row["entry_date"] . "</td>";
-                        echo "<td>" . $row["exit_date"] . "</td>";
-                        echo "<td>" . $row["customer_type"] . "</td>";
-                        echo "<td>";
-                        echo "<a class='btn btn-primary' href='editar_cliente.php?id=" . $row["Code"] . "'>Editar</a> ";
-                        echo "<a class='btn btn-danger' href='eliminar_cliente.php?id=" . $row["Code"] . "'>Eliminar</a>";
-                        echo "</td>";
-                        echo "</tr>";
+                if ($result) {
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["Code"] . "</td>";
+                            echo "<td>" . $row["Name"] . "</td>";
+                            echo "<td>" . $row["Status"] . "</td>";
+                            echo "<td>" . $row["Address"] . "</td>";
+                            echo "<td>" . $row["Nit"] . "</td>";
+                            echo "<td>" . $row["Phone"] . "</td>";
+                            echo "<td>" . $row["Entry_Date"] . "</td>";
+                            echo "<td>" . $row["Exit_Date"] . "</td>";
+                            echo "<td>" . $row["Supplier_Type"] . "</td>";
+                            echo "<td>";
+                            echo "<a class='btn btn-primary' href='editar_proveedor.php?id=" . $row["Code"] . "'>Editar</a> ";
+                            echo "<a class='btn btn-danger' href='eliminar_proveedor.php?id=" . $row["Code"] . "'>Eliminar</a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='10'>No se encontraron registros.</td></tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='10'>No se encontraron registros.</td></tr>";
+                    echo "Error en la consulta SQL: " . $conn->error;
                 }
                 ?>
             </tbody>
@@ -158,14 +161,14 @@ if (!isset($_SESSION['nombre'])) {
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <?php
-                // Consultar la cantidad total de clientes
-                $sqlTotal = "SELECT COUNT(*) as total FROM customers";
+                // Consultar la cantidad total de proveedores
+                $sqlTotal = "SELECT COUNT(*) as total FROM Suppliers";
                 $resultTotal = $conn->query($sqlTotal);
                 $filaTotal = $resultTotal->fetch_assoc();
-                $totalClientes = $filaTotal["total"];
+                $totalProveedores = $filaTotal["total"];
 
                 // Calcular el número de páginas
-                $totalPaginas = ceil($totalClientes / $clientesPorPagina);
+                $totalPaginas = ceil($totalProveedores / $proveedoresPorPagina);
 
                 // Mostrar los enlaces de paginación
                 for ($i = 1; $i <= $totalPaginas; $i++) {
@@ -173,7 +176,7 @@ if (!isset($_SESSION['nombre'])) {
                     if ($i == $paginaActual) {
                         echo "active";
                     }
-                    echo "'><a class='page-link' href='clientes.php?pagina=$i'>$i</a></li>";
+                    echo "'><a class='page-link' href='proveedores.php?pagina=$i'>$i</a></li>";
                 }
                 ?>
             </ul>
@@ -189,9 +192,9 @@ if (!isset($_SESSION['nombre'])) {
         // Función para exportar la tabla a Excel
         function exportToExcel() {
             const table = XLSX.utils.table_to_book(document.querySelector('table'), {
-                sheet: "Clientes"
+                sheet: "proveedores"
             });
-            XLSX.writeFile(table, 'clientes.xlsx');
+            XLSX.writeFile(table, 'proveedores.xlsx');
         }
 
         // Función para exportar la tabla a PDF
@@ -203,7 +206,7 @@ if (!isset($_SESSION['nombre'])) {
                 const width = pdf.internal.pageSize.getWidth();
                 const height = pdf.internal.pageSize.getHeight();
                 pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-                pdf.save('clientes.pdf');
+                pdf.save('proveedores.pdf');
             });
         }
 
