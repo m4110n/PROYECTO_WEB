@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Buscar Proveedor</title>
+    <title>Buscar Categoría</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -12,18 +12,17 @@
 
 <body>
     <div class="container">
-        <h1 class="mt-4">Buscar Proveedor</h1>
+        <h1 class="mt-4">Buscar Categoría</h1>
 
         <!-- Formulario de búsqueda -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET" class="mb-3">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="searchField">Buscar proveedor por:</label>
+                    <label for="searchField">Buscar categoría por:</label>
                     <select class="form-control" id="searchField" name="searchField">
                         <option value="Code">Code</option>
                         <option value="Name">Name</option>
                         <option value="Status">Status</option>
-                        <option value="Supplier_Type">Supplier Type</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -71,32 +70,26 @@
             $search_field = $_GET["searchField"];
         }
 
-        // Consulta la base de datos para buscar proveedores con paginación
-        $sql = "SELECT * FROM Suppliers WHERE $search_field LIKE '%" . $search_query . "%' LIMIT $offset, $results_per_page";
+        // Consulta la base de datos para buscar categorías con paginación
+        $sql = "SELECT * FROM categories WHERE $search_field LIKE '%" . $search_query . "%' LIMIT $offset, $results_per_page";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             echo "<table class='table table-bordered'>";
-            echo "<thead class='thead-dark'><tr><th>Code</th><th>Name</th><th>Status</th><th>Address</th><th>Nit</th><th>Phone</th><th>Entry Date</th><th>Exit Date</th><th>Supplier Type</th></tr></thead>";
+            echo "<thead class='thead-dark'><tr><th>Code</th><th>Name</th><th>Status</th></tr></thead>";
 
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["Code"] . "</td>";
                 echo "<td>" . $row["Name"] . "</td>";
                 echo "<td>" . $row["Status"] . "</td>";
-                echo "<td>" . $row["Address"] . "</td>";
-                echo "<td>" . $row["Nit"] . "</td>";
-                echo "<td>" . $row["Phone"] . "</td>";
-                echo "<td>" . $row["Entry_Date"] . "</td>";
-                echo "<td>" . $row["Exit_Date"] . "</td>";
-                echo "<td>" . $row["Supplier_Type"] . "</td>";
                 echo "</tr>";
             }
 
             echo "</table>";
 
             // Paginación
-            $sql = "SELECT COUNT(*) AS total FROM Suppliers WHERE $search_field LIKE '%" . $search_query . "%'";
+            $sql = "SELECT COUNT(*) AS total FROM categories WHERE $search_field LIKE '%" . $search_query . "%'";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             $total_pages = ceil($row["total"] / $results_per_page);

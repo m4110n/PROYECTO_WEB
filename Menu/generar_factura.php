@@ -12,9 +12,18 @@ if (!isset($_SESSION['nombre'])) {
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>Generar Factura de Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
     <script type="text/javascript">
         function updateClientInfo() {
             var clientSelect = document.getElementById("client_code");
@@ -33,15 +42,20 @@ if (!isset($_SESSION['nombre'])) {
             phoneField.value = phoneValue;
         }
 
-        function updateMedicationPrice() {
+        function updateMedicationDetails() {
             var medicationSelect = document.getElementById("medication_code");
-            var salePriceField = document.getElementById("medication_sale_price");
+            var medicationDescriptionField = document.getElementById("medication_description");
+            var medicationExpireDateField = document.getElementById("medication_expire_date");
+            var medicationSalePriceField = document.getElementById("medication_sale_price");
 
             var selectedOption = medicationSelect.options[medicationSelect.selectedIndex];
+            var expireDate = selectedOption.getAttribute("data-expiry-date");
+            var salePrice = selectedOption.getAttribute("data-sale-price");
+            var description = selectedOption.text;
 
-            var salePriceValue = selectedOption.getAttribute("data-sale-price");
-
-            salePriceField.value = salePriceValue;
+            medicationExpireDateField.value = expireDate;
+            medicationSalePriceField.value = salePrice;
+            medicationDescriptionField.value = description;
         }
 
         function fillCurrentDate() {
@@ -58,19 +72,6 @@ if (!isset($_SESSION['nombre'])) {
             var medicationPrice = parseFloat(document.getElementById("medication_sale_price").value) || 0;
             var totalAmount = medicationQuantity * medicationPrice;
             document.getElementById("total_amount").value = totalAmount.toFixed(2);
-        }
-
-        function updateMedicationDetails() {
-            var medicationSelect = document.getElementById("medication_code");
-            var medicationExpireDateField = document.getElementById("medication_expire_date");
-            var medicationSalePriceField = document.getElementById("medication_sale_price");
-
-            var selectedOption = medicationSelect.options[medicationSelect.selectedIndex];
-            var expireDate = selectedOption.getAttribute("data-expiry-date");
-            var salePrice = selectedOption.getAttribute("data-sale-price");
-
-            medicationExpireDateField.value = expireDate;
-            medicationSalePriceField.value = salePrice;
         }
 
         function addMedicationRow() {
@@ -96,6 +97,7 @@ if (!isset($_SESSION['nombre'])) {
             }
 
             updateTotalAmount();
+            calculateTotal();
         }
 
         function updateTotalAmount() {
@@ -110,35 +112,48 @@ if (!isset($_SESSION['nombre'])) {
 
             document.getElementById("total_amount").value = totalAmount.toFixed(2);
         }
-
-        function generatePDF() {
-            const doc = new jsPDF();
-
-            doc.text("Factura de Cliente", 10, 10);
-
-            const clientCode = document.getElementById("client_code").value;
-            const purchaseDate = document.getElementById("purchase_date").value;
-            const totalAmount = document.getElementById("total_amount").value;
-            const nit = document.getElementById("nit").value;
-            const address = document.getElementById("address").value;
-            const phone = document.getElementById("phone").value;
-
-            doc.text(`Código de Cliente: ${clientCode}`, 10, 20);
-            doc.text(`Fecha de Compra: ${purchaseDate}`, 10, 30);
-            doc.text(`Total de la Factura: $${totalAmount}`, 10, 40);
-            doc.text(`NIT: ${nit}`, 10, 50);
-            doc.text(`Dirección: ${address}`, 10, 60);
-            doc.text(`Teléfono: ${phone}`, 10, 70);
-
-            doc.save("factura.pdf");
-        }
     </script>
 </head>
+<!-- Botón desplegable en la parte superior derecha -->
+<div class="btn-group float-right">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Opciones
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="index.php">
+            <i class="fas fa-home"></i> Inicio
+        </a>
+        <a class="dropdown-item" href="clientes.php">
+            <i class="fas fa-users"></i> Clientes
+        </a>
+        <a class="dropdown-item" href="compras.php">
+            <i class="fas fa-shopping-cart"></i> Compras
+        </a>
+        <a class="dropdown-item" href="empleados.php">
+            <i class="fas fa-user"></i> Empleados
+        </a>
+        <a class="dropdown-item" href="productos.php">
+            <i class="fas fa-box"></i> Productos
+        </a>
+        <a class="dropdown-item" href="proveedores.php">
+            <i class="fas fa-truck"></i> Proveedores
+        </a>
+        <a class="dropdown-item" href="usuarios.php">
+            <i class="fas fa-user-circle"></i> Usuarios
+        </a>
+        <a class="dropdown-item" href="ventas.php">
+            <i class="fas fa-dollar-sign"></i> Ventas
+        </a>
+        <a class="dropdown-item" href="categorias.php">
+            <i class="fas fa-tags"></i> Categorías
+        </a>
+    </div>
+</div>
 
 <body onload="fillCurrentDate()">
     <div class="container mt-5">
         <h1 class="mb-4">Generar Factura de Cliente</h1>
-        <form method="post">
+        <form method="post" action="generar_factura_pdf.php">
             <div class="mb-3">
                 <label for="client_code" class="form-label">Selecciona un Cliente:</label>
                 <select name="client_code" id="client_code" required class="form-select" onchange="updateClientInfo()">
@@ -146,7 +161,7 @@ if (!isset($_SESSION['nombre'])) {
                     <?php
                     $servername = "localhost";
                     $username = "root";
-                    $password = "";
+                    $password = ""; // Tu contraseña si la tienes
                     $dbname = "botiquin_sa";
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -154,10 +169,10 @@ if (!isset($_SESSION['nombre'])) {
                         die("Error de conexión: " . $conn->connect_error);
                     }
 
-                    $query = "SELECT Code, Name, NIT, Address, Phone FROM customers";
-                    $result = $conn->query($query);
+                    $queryClientes = "SELECT Code, Name, NIT, Address, Phone FROM customers";
+                    $resultClientes = $conn->query($queryClientes);
 
-                    while ($row = $result->fetch_assoc()) {
+                    while ($row = $resultClientes->fetch_assoc()) {
                         echo "<option value='" . $row['Code'] . "' data-nit='" . $row['NIT'] . "' data-address='" . $row['Address'] . "' data-phone='" . $row['Phone'] . "'>" . $row['Code'] . " - " . $row['Name'] . "</option>";
                     }
 
@@ -173,7 +188,7 @@ if (!isset($_SESSION['nombre'])) {
 
             <div class="mb-3">
                 <label for="total_amount" class="form-label">Total de la Factura:</label>
-                <input type="text" name="total_amount" required class="form-control" readonly>
+                <input type="text" id="total_amount" name="total_amount" class="form-control" readonly>
             </div>
 
             <div class="mb-3">
@@ -202,11 +217,11 @@ if (!isset($_SESSION['nombre'])) {
                         die("Error de conexión: " . $conn->connect_error);
                     }
 
-                    $query = "SELECT Code, Description, Sale_Price, Expiry_Date FROM medications";
-                    $result = $conn->query($query);
+                    $queryMedicamentos = "SELECT Code, Description, Sale_Price, Expiry_Date FROM medications";
+                    $resultMedicamentos = $conn->query($queryMedicamentos);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
+                    if ($resultMedicamentos->num_rows > 0) {
+                        while ($row = $resultMedicamentos->fetch_assoc()) {
                             echo "<option value='" . $row['Code'] . "' data-sale-price='" . $row['Sale_Price'] . "' data-expiry-date='" . $row['Expiry_Date'] . "'>" . $row['Description'] . " (Vence el " . $row['Expiry_Date'] . ")</option>";
                         }
                     } else {
@@ -224,13 +239,18 @@ if (!isset($_SESSION['nombre'])) {
             </div>
 
             <div class="mb-3">
+                <label for="medication_description" class="form-label">Descripción del Medicamento:</label>
+                <input type="text" name="medication_description" id="medication_description" class="form-control" readonly>
+            </div>
+
+            <div class="mb-3">
                 <label for="medication_expire_date" class="form-label">Fecha de Vencimiento del Medicamento:</label>
                 <input type="text" name="medication_expire_date" id="medication_expire_date" required class="form-control" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="medication_sale_price" class="form-label">Precio de Venta del Medicamento:</label>
-                <input type="text" name="medication_sale_price" id="medication_sale_price" required class="form-control" readonly>
+                <input type="text" name "medication_sale_price" id="medication_sale_price" required class="form-control" readonly>
             </div>
 
             <button type="button" class="btn btn-primary" onclick="addMedicationRow()">Agregar Medicamento</button>
@@ -241,17 +261,12 @@ if (!isset($_SESSION['nombre'])) {
 
             <div class="mb-3">
                 <label for="total_amount" class="form-label">Total General:</label>
-                <input type="text" id="total_amount" class="form-control" readonly>
+                <input type="text" id="total_amount" name="total_amount" class="form-control" readonly>
             </div>
 
-            <button type="button" class="btn btn-success" onclick="generatePDF()">Generar PDF</button>
+            <button type="submit" class="btn btn-success" name="generate_pdf">Generar PDF</button>
         </form>
     </div>
-    <script type="text/javascript">
-        window.onload = function() {
-            generatePDF();
-        };
-    </script>
 </body>
 
 </html>

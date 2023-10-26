@@ -1,19 +1,111 @@
-/* Estilos personalizados */
+/* Estilos para el fondo de la página */
 body {
-    background-color: #f2f2f2;
+    background-color: #f8f8f8; /* Cambia el color de fondo de la página */
 }
 
-.container {
-    margin-top: 30px;
+/* Estilos para los enlaces */
+a {
+    text-decoration: none; /* Quita la subraya en los enlaces */
+    color: #007BFF; /* Cambia el color de los enlaces */
 }
 
+a:hover {
+    color: #0056b3; /* Cambia el color al pasar el mouse por encima de los enlaces */
+}
+
+/* Estilos para el encabezado del pie de página */
+footer h4 {
+    color: #fff; /* Cambia el color del encabezado del pie de página */
+    font-size: 1.2em;
+}
+
+/* Estilos para el contenido del pie de página */
+footer p {
+    font-size: 0.9em; /* Cambia el tamaño del texto del pie de página */
+}
+
+/* Estilos para resaltar el texto */
+.highlight {
+    background-color: #ffec65; /* Cambia el color de fondo del texto resaltado */
+    font-weight: bold; /* Hace que el texto resaltado sea más audaz */
+}
+
+/* Estilos para un botón personalizado */
+.btn-custom {
+    background-color: #007BFF; /* Cambia el color de fondo del botón */
+    color: #fff; /* Cambia el color del texto del botón */
+    border: none; /* Quita el borde del botón */
+    padding: 10px 20px; /* Ajusta el relleno del botón */
+    border-radius: 5px; /* Agrega bordes redondeados al botón */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el mouse por encima del botón */
+}
+
+/* Estilos para el contenedor de imágenes */
 .img-thumbnail {
-    border: none;
+    border: 2px solid #ddd; /* Agrega un borde a las miniaturas de imágenes */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.2s;
 }
 
+.img-thumbnail:hover {
+    transform: scale(1.05); /* Efecto de escala al pasar el mouse por encima */
+}
+
+/* Estilos para el encabezado (h1) */
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Estilos para el contenedor principal */
+.container {
+    background-color: #fff; /* Cambia el color de fondo del contenedor principal */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los márgenes en dispositivos pequeños */
+@media (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+}
+
+/* Estilos para el pie de página */
+/* Estilos para el pie de página */
 footer {
-    background-color: #343a40;
-    color: white;
+    background-color: #007BFF; /* Cambia el color de fondo del footer a un tono de azul */
+    color: #fff;
+    padding: 15px 0;
     text-align: center;
-    padding: 10px 0;
+}
+
+/* Estilos para el texto de derechos de autor */
+footer p {
+    background-color: #007BFF; /* Cambia el color de fondo del texto de derechos de autor */
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+}
+
+
+/* Estilos para la etiqueta de carga de imagen personalizada */
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.custom-file-upload:hover {
+    background-color: #0056b3;
 }

@@ -14,7 +14,7 @@
             <a href="#">Inicio</a>
             <a href="#">Acerca de</a>
             <a href="#">Servicios</a>
-            <a href="#">Contacto</a>
+            <a href="./contacto/contacto.php">Contacto</a>
             <button class="bthLogin-popup">Iniciar sesión</button>
         </nav>
     </header>

@@ -1,22 +1,14 @@
-<?php
-session_start();
-
-// Verificar si el usuario está logueado
-if (!isset($_SESSION['nombre'])) {
-    // Redirigir a la página de inicio de sesión si no está logueado
-    header("Location: ../login/login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Editar Cliente</title>
+    <!-- Agrega el enlace al archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
-    <h1>Editar Cliente</h1>
+<body class="container mt-5">
+    <h1 class="text-center">Editar Cliente</h1>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
@@ -47,10 +39,16 @@ if (!isset($_SESSION['nombre'])) {
     ?>
             <form action='guardar_edicion_cliente.php' method='POST'>
                 <input type='hidden' name='customer_id' value='<?php echo $row["Code"]; ?>'>
-                Nombre: <input type='text' name='name' value='<?php echo $row["Name"]; ?>'><br>
-                Estado: <input type='text' name='status' value='<?php echo $row["Status"]; ?>'><br>
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type='text' class="form-control" name='name' value='<?php echo $row["Name"]; ?>'>
+                </div>
+                <div class="form-group">
+                    <label for="status">Estado:</label>
+                    <input type='text' class="form-control" name='status' value='<?php echo $row["Status"]; ?>'>
+                </div>
                 <!-- Agrega más campos según tus necesidades -->
-                <input type='submit' value='Guardar Cambios'>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </form>
     <?php
         } else {

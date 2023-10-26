@@ -6,7 +6,7 @@ if (isset($_POST['inicio_sesion'])) {
         $email = $_POST["correo"];
         $password = $_POST["contraseña"];
         //comparando datos
-        $sql = $conn->query("select * from users where email='$email' and password='$password' ");
+        $sql = $conn->query("SELECT * FROM users WHERE email='$email' AND password='$password' AND status='active'");
         if ($datos = $sql->fetch_object()) {
             //almacenando datos de la sesion
             $_SESSION["id"] = $datos->id;
