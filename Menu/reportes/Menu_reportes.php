@@ -13,10 +13,14 @@ if (!isset($_SESSION['nombre'])) {
 
 <head>
     <title>Reportes</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -88,31 +92,28 @@ if (!isset($_SESSION['nombre'])) {
             Opciones
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="index.php">
+            <a class="dropdown-item" href="../index.php">
                 <i class="fas fa-home"></i> Inicio
             </a>
-            <a class="dropdown-item" href="ventas.php">
+            <a class="dropdown-item" href="../generar_factura.php">
                 <i class="fas fa-users"></i> Reporte Venta
             </a>
-            <a class="dropdown-item" href="compras.php">
+            <a class="dropdown-item" href="../compras.php">
                 <i class="fas fa-shopping-cart"></i> Compras
             </a>
-            <a class="dropdown-item" href="empleados.php">
+            <a class="dropdown-item" href="../empleados.php">
                 <i class="fas fa-user"></i> Empleados
             </a>
-            <a class="dropdown-item" href="productos.php">
+            <a class="dropdown-item" href="../../Menu/medicamento.php">
                 <i class="fas fa-box"></i> Productos
             </a>
-            <a class="dropdown-item" href="proveedores.php">
+            <a class="dropdown-item" href="../proveedores.php">
                 <i class="fas fa-truck"></i> Proveedores
             </a>
-            <a class="dropdown-item" href="usuarios.php">
-                <i class="fas fa-user-circle"></i> Usuarios
-            </a>
-            <a class="dropdown-item" href="ventas.php">
+            <a class="dropdown-item" href="../ventasmaster/listar.php">
                 <i class="fas fa-dollar-sign"></i> Ventas
             </a>
-            <a class="dropdown-item" href="categorias.php">
+            <a class="dropdown-item" href="../categorias.php">
                 <i class="fas fa-tags"></i> Categorías
             </a>
         </div>

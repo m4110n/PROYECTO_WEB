@@ -65,31 +65,28 @@ $hoy = date("Y-m-d");
         </div>
 
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="index.php">
+            <a class="dropdown-item" href="../index.php">
                 <i class="fas fa-home"></i> Inicio
             </a>
-            <a class="dropdown-item" href="ventas.php">
+            <a class="dropdown-item" href="../generar_factura.php">
                 <i class="fas fa-users"></i> Reporte Venta
             </a>
-            <a class="dropdown-item" href="compras.php">
+            <a class="dropdown-item" href="../compras.php">
                 <i class="fas fa-shopping-cart"></i> Compras
             </a>
-            <a class="dropdown-item" href="empleados.php">
+            <a class="dropdown-item" href="../empleados.php">
                 <i class="fas fa-user"></i> Empleados
             </a>
-            <a class="dropdown-item" href="productos.php">
+            <a class="dropdown-item" href="../../Menu/medicamento.php">
                 <i class="fas fa-box"></i> Productos
             </a>
-            <a class="dropdown-item" href="proveedores.php">
+            <a class="dropdown-item" href="../proveedores.php">
                 <i class="fas fa-truck"></i> Proveedores
             </a>
-            <a class="dropdown-item" href="usuarios.php">
-                <i class="fas fa-user-circle"></i> Usuarios
-            </a>
-            <a class="dropdown-item" href="ventas.php">
+            <a class="dropdown-item" href="../ventasmaster/listar.php">
                 <i class="fas fa-dollar-sign"></i> Ventas
             </a>
-            <a class="dropdown-item" href="categorias.php">
+            <a class="dropdown-item" href="../categorias.php">
                 <i class="fas fa-tags"></i> Categorías
             </a>
         </div>

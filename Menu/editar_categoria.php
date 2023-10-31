@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['nombre'])) {
+    // Redirigir a la página de inicio de sesión si no está logueado
+    header("Location: ../login/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,26 +47,26 @@
             // Aquí puedes mostrar un formulario para editar los datos de la categoría
             // Por ejemplo:
     ?>
-           <form action="guardar_edicion_categoria.php" method="POST">
-    <input type="hidden" name="categoria_id" value="<?php echo $row["Code"]; ?>">
-    <div class="form-group">
-        <label for="name">Nombre:</label>
-        <input type="text" class="form-control" name="name" value="<?php echo $row["Name"]; ?>">
-    </div>
-    <div class="form-group">
-        <label for="status">Estado:</label>
-        <input type="text" class="form-control" name="status" value="<?php echo $row["Status"]; ?>">
-    </div>
-    <div class="form-group">
-        <label for="entry_date">Fecha de entrada:</label>
-        <input type="text" class="form-control" name="entry_date" value="<?php echo $row["Entry_Date"]; ?>">
-    </div>
-    <div class="form-group">
-        <label for="exit_date">Fecha de salida:</label>
-        <input type="text" class="form-control" name="exit_date" value="<?php echo $row["Exit_Date"]; ?>">
-    </div>
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-</form>
+            <form action="guardar_edicion_categoria.php" method="POST">
+                <input type="hidden" name="categoria_id" value="<?php echo $row["Code"]; ?>">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" class="form-control" name="name" value="<?php echo $row["Name"]; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="status">Estado:</label>
+                    <input type="text" class="form-control" name="status" value="<?php echo $row["Status"]; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="entry_date">Fecha de entrada:</label>
+                    <input type="text" class="form-control" name="entry_date" value="<?php echo $row["Entry_Date"]; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="exit_date">Fecha de salida:</label>
+                    <input type="text" class="form-control" name="exit_date" value="<?php echo $row["Exit_Date"]; ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </form>
 
     <?php
         } else {

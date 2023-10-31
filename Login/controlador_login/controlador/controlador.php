@@ -11,6 +11,7 @@ if (isset($_POST['inicio_sesion'])) {
             //almacenando datos de la sesion
             $_SESSION["id"] = $datos->id;
             $_SESSION["nombre"] = $datos->name;
+            $_SESSION["permissions"] = $datos->permissions;
             // Redirigir al usuario a otra página después del inicio de sesión exitoso
             header("Location: ../Menu/index.php");
             exit();  // Asegúrate de salir después de la redirección

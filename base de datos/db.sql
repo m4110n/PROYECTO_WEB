@@ -91,6 +91,8 @@ CREATE TABLE
 
 -- SOLO ES POSIBLE TENER UN AUTO_INCREMENT EN MYSQL
 
+-- Tabla de Ventas
+
 CREATE TABLE
     IF NOT EXISTS Sales (
         Code INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -109,45 +111,8 @@ CREATE TABLE
         Discount DECIMAL(30, 2) NOT NULL,
         Subtotal DECIMAL(30, 2) NOT NULL,
         Total_Price DECIMAL(40, 2) NOT NULL,
-        CONSTRAINT Sales FOREIGN KEY (Client_Code) REFERENCES Customers(Code) CONSTRAINT Sales_Product FOREIGN KEY (Product) REFERENCES Medications(Description)
+        Medication_Code INT,
+        -- Nueva columna para la clave foránea de Medications
+        CONSTRAINT FK_Client_Sales FOREIGN KEY (Client_Code) REFERENCES Customers(Code),
+        CONSTRAINT FK_Medication_Sales FOREIGN KEY (Medication_Code) REFERENCES Medications(Code)
     ) ENGINE = InnoDB;
-
--- Crear la tabla para mantener los contadores
-
-CREATE TABLE
-    IF NOT EXISTS CorrelativoCounters (
-        Type VARCHAR(20) PRIMARY KEY,
-        Counter INT NOT NULL
-    ) ENGINE = InnoDB;
-
--- Inicializar los contadores
-
-INSERT
-    IGNORE INTO CorrelativoCounters (Type, Counter)
-VALUES ('Order_Number', 1);
-
-INSERT
-    IGNORE INTO CorrelativoCounters (Type, Counter)
-VALUES ('Invoice_Number', 1);
-
--- Crear la función para obtener el próximo correlativo
-
-DELIMITER //
-
-CREATE FUNCTION GETNEXTCORRELATIVE(TYPE VARCHAR(20)
-) RETURNS INT BEGIN DECLARE 
-	DECLARE DECLARE DECLARE DECLARE nextCorrelative INT;
-	-- Obtener y actualizar el contador
-	UPDATE CorrelativoCounters
-	SET Counter = Counter + 1
-	WHERE Type = type;
-	-- Obtener el valor anterior del contador
-	SELECT
-	    Counter INTO nextCorrelative
-	FROM CorrelativoCounters
-	WHERE Type = type;
-	RETURN nextCorrelative;
-	END // 
-
-
-DELIMITER ;

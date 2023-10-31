@@ -3,9 +3,9 @@ session_start();
 
 // Verificar si el usuario está logueado
 //if (!isset($_SESSION['nombre'])) {
-    // Redirigir a la página de inicio de sesión si no está logueado
-    //header("Location: ../login/login.php");
-    //exit();
+// Redirigir a la página de inicio de sesión si no está logueado
+//header("Location: ../login/login.php");
+//exit();
 //}
 
 // Definir la variable $inicio
@@ -14,7 +14,7 @@ $inicio = 0;
 // Establecer la conexión a la base de datos
 $servername = "localhost";
 $username = "root";
-$password = ""; 
+$password = "";
 $dbname = "botiquin_sa";
 
 // Crear una conexión
@@ -78,31 +78,28 @@ $result = $conn->query($sql);
                 Opciones
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="index.php">
+                <a class="dropdown-item" href="../index.php">
                     <i class="fas fa-home"></i> Inicio
                 </a>
-                <a class="dropdown-item" href="ventas.php">
+                <a class="dropdown-item" href="../generar_factura.php">
                     <i class="fas fa-users"></i> Reporte Venta
                 </a>
-                <a class="dropdown-item" href="compras.php">
+                <a class="dropdown-item" href="../compras.php">
                     <i class="fas fa-shopping-cart"></i> Compras
                 </a>
-                <a class="dropdown-item" href="empleados.php">
+                <a class="dropdown-item" href="../empleados.php">
                     <i class="fas fa-user"></i> Empleados
                 </a>
-                <a class="dropdown-item" href="productos.php">
+                <a class="dropdown-item" href="../../Menu/medicamento.php">
                     <i class="fas fa-box"></i> Productos
                 </a>
-                <a class="dropdown-item" href="proveedores.php">
+                <a class="dropdown-item" href="../proveedores.php">
                     <i class="fas fa-truck"></i> Proveedores
                 </a>
-                <a class="dropdown-item" href="usuarios.php">
-                    <i class="fas fa-user-circle"></i> Usuarios
-                </a>
-                <a class="dropdown-item" href="ventas.php">
+                <a class="dropdown-item" href="../ventasmaster/listar.php">
                     <i class="fas fa-dollar-sign"></i> Ventas
                 </a>
-                <a class="dropdown-item" href="categorias.php">
+                <a class="dropdown-item" href="../categorias.php">
                     <i class="fas fa-tags"></i> Categorías
                 </a>
             </div>
@@ -162,7 +159,6 @@ $result = $conn->query($sql);
                         echo "<td>" . $row["Shelf_Level"] . "</td>";
                         echo "<td>" . $row["shelf_position_number"] . "</td>";
                         echo "<td>" . $row["Entry_Date"] . "</td>";
-                       
                     }
                 } else {
                     echo "<tr><td colspan='10'>No se encontraron registros.</td></tr>";
@@ -170,7 +166,7 @@ $result = $conn->query($sql);
                 ?>
             </tbody>
         </table>
-        
+
         <!-- Paginación -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -193,7 +189,7 @@ $result = $conn->query($sql);
         // Función para exportar la tabla a PDF
         function exportToPDF() {
             const table = document.getElementById('table-to-export');
-            html2canvas(table).then(function (canvas) {
+            html2canvas(table).then(function(canvas) {
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const width = pdf.internal.pageSize.getWidth();
@@ -210,7 +206,7 @@ $result = $conn->query($sql);
 </body>
 <footer>
     <div class="container">
-    <p>Derechos de autor &copy; 2023 Ana Maria Cordero Aguilar - BOTIQUIN S.A</p>
+        <p>Derechos de autor &copy; 2023 Ana Maria Cordero Aguilar - BOTIQUIN S.A</p>
     </div>
 </footer>
 

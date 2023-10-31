@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-// Verificar si el usuario está logueado
-if (!isset($_SESSION['nombre'])) {
-    // Redirigir a la página de inicio de sesión si no está logueado
-    header("Location: ../login/login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +10,7 @@ if (!isset($_SESSION['nombre'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 </head>
 

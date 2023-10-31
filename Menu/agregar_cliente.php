@@ -93,8 +93,8 @@
                     <?php
                     // Obtén valores únicos de Status desde la base de datos
                     $servername = "localhost"; // Cambia esto al servidor de tu base de datos
-                    $username = "DrawdeDonis"; // Cambia esto a tu nombre de usuario de la base de datos
-                    $password = "Drawde1995"; // Cambia esto a tu contraseña de la base de datos
+                    $username = "root"; // Cambia esto a tu nombre de usuario de la base de datos
+                    $password = ""; // Cambia esto a tu contraseña de la base de datos
                     $dbname = "botiquin_sa"; // Cambia esto al nombre de tu base de datos (sin espacios)
 
                     // Crear una conexión

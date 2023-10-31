@@ -7,7 +7,18 @@ if (!isset($_SESSION['nombre'])) {
     header("Location: ../login/login.php");
     exit();
 }
+
+// Verificar el permiso de administrador
+$permisos = $_SESSION["permissions"];
+
+// Si los permisos no son de administrador, ocultar esto
+if ($permisos !== 'admin') {
+    header("Location: index1.php");
+} else {
+}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -37,8 +48,9 @@ if (!isset($_SESSION['nombre'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-home"></i> INICIO</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-cogs"></i> Configuración</a>
+                        <a class="nav-link" href="./Usuarios/usuarios.php"><i class="fas fa-cogs"></i> Configuración</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../login/controlador_login/controlador_cerrar/controlador_cerrar_sesion.php"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
@@ -96,7 +108,7 @@ if (!isset($_SESSION['nombre'])) {
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="productos.php" class="icon-link">
+                        <a href="medicamento.php" class="icon-link">
                             <i class="fas fa-box fa-3x"></i>
                             <p>Productos</p>
                         </a>
@@ -108,13 +120,13 @@ if (!isset($_SESSION['nombre'])) {
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="enlace6.php" class="icon-link">
+                        <a href="./Usuarios/usuarios.php" class="icon-link">
                             <i class="fas fa-user fa-3x"></i>
                             <p>Usuarios</p>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="ventas.php" class="icon-link">
+                        <a href="../Menu/ventasmaster/listar.php" class="icon-link">
                             <i class="fas fa-chart-line fa-3x"></i>
                             <p>Ventas</p>
                         </a>
